@@ -8,10 +8,7 @@ Hangman is a JavaFX-based Hangman game developed for the Multimedia Technologies
 ## Features
 
 - **Dictionary Creation:**  
-  The game automatically creates a word list by fetching book descriptions from the Open Library API. It only keeps words that:
-  - Have 6 or more letters.
-  - Include at least 20 unique words.
-  - Have at least 20% of the words with 9 or more letters.
+  The game automatically creates a word list by fetching book descriptions from the Open Library API.
 
 - **Game Mechanics:**  
   - **Random Word:** The game picks a secret word from the word list.
