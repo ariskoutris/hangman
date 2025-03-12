@@ -3,7 +3,7 @@
 Hangman is a JavaFX-based Hangman game developed for the Multimedia Technologies course at the National Technical University of Athens.
 
 <p align="center">
-  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExb3BtYWs4cDI1MHFyNXVlMjUwaGFjZXZ5MGZyM2hoeGVzcXRvN3BtdyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i9LjfZj5FzbPjheZDJ/giphy.gif" alt="demo-image" width="60%">
+  <img src="https://imgur.com/jFP4DF8.gif" alt="demo-image" width="80%">
 </p>
 
 
