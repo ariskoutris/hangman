@@ -7,7 +7,9 @@ import java.io.PrintWriter;
 import java.nio.file.NoSuchFileException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -38,6 +40,7 @@ public class MainSceneController{
     private boolean gameActive;
     private int guesses, corr_guesses;
 
+    
     @FXML private Button submitBtn;
     @FXML private Text hpText, secretWord, pointsText, wordCountText, successRateText, gameOutcomeText;
     @FXML private Menu applicationMenu, detailsMenu;
@@ -48,6 +51,9 @@ public class MainSceneController{
     @FXML private ComboBox<Integer> cellDropdown;
     @FXML private ComboBox<Character> letterDropdown;
 
+    // Add a map to cache letter choices for each cell
+    private Map<Integer, char[]> cellLetterChoices;
+
     final int ROW_HEIGHT = 24;
     private static String hangman_stages_path = "file:./resources/medialab/hangman_stages/";
     private static final DecimalFormat df = new DecimalFormat("0.0");
@@ -55,6 +61,7 @@ public class MainSceneController{
    public MainSceneController() {
        game = new Game();
        gameActive = false;
+       cellLetterChoices = new HashMap<>();
    }
 
    @FXML private void initialize() {
@@ -66,14 +73,14 @@ public class MainSceneController{
 
     @FXML public void startMenuItmHandler(ActionEvent event) {
         try {
-
             game.start();
             gameActive = true;
             gameOutcomeText.setVisible(false);
             guesses = -1;
             corr_guesses = -1;
+            // Clear the letter choices cache when starting a new game
+            cellLetterChoices.clear();
             updateInfo();
-
         } catch (Exception e) {
             Alert alert = new Alert(AlertType.ERROR);
     		alert.setTitle("Undefined Dictionary");
@@ -112,10 +119,16 @@ public class MainSceneController{
         cellDropdown.getItems().clear();
         letterDropdown.getItems().clear();
         letterDropdown.setDisable(true);
+        cellLetterChoices.clear(); // Clear previous choices
+        
         for (int cell = 0; cell < game.getTargetLen(); cell++) {
             if (revCells[cell] == true) continue;
             cellsList.add(cell+1);
+            
+            // Get and cache the letter choices for this cell
             choices = game.getCellChoices(cell);
+            cellLetterChoices.put(cell, choices);
+            
             cellDropdown.getItems().add(cell+1);
             sb = new StringBuilder();
             sb.append(choices[0]);
@@ -141,8 +154,13 @@ public class MainSceneController{
             letterDropdown.setDisable(false);
             letterDropdown.getItems().clear();
             int cell = cellDropdown.getValue()-1;
-            for(char c: game.getCellChoices(cell)) {
-                letterDropdown.getItems().add(c);
+            
+            // Use the cached letter choices instead of generating new ones
+            char[] choices = cellLetterChoices.get(cell);
+            if (choices != null) {
+                for(char c: choices) {
+                    letterDropdown.getItems().add(c);
+                }
             }
         }	    
     }
