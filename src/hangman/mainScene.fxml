@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="hangman.MainSceneController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu fx:id="applicationMenu" mnemonicParsing="false" text="Application">
+            <items>
+              <MenuItem fx:id="startMenuItm" mnemonicParsing="false" onAction="#startMenuItmHandler" text="Start" />
+                  <MenuItem fx:id="loadMenuItm" mnemonicParsing="false" onAction="#loadMenuItmHandler" text="Load" />
+                  <MenuItem fx:id="createMenuItm" mnemonicParsing="false" onAction="#createMenuItmHandler" text="Create" />
+                  <MenuItem fx:id="exitMenuItm" mnemonicParsing="false" onAction="#exitMenuItmHandler" text="Exit" />
+            </items>
+          </Menu>
+          <Menu fx:id="detailsMenu" mnemonicParsing="false" text="Details">
+            <items>
+              <MenuItem fx:id="dictionaryMenuItm" mnemonicParsing="false" onAction="#dictionaryMenuItmHandler" text="Dictionary" />
+                  <MenuItem fx:id="roundsMenuItm" mnemonicParsing="false" onAction="#roundsMenuItmHandler" text="Rounds" />
+                  <MenuItem fx:id="solutionMenuItm" mnemonicParsing="false" onAction="#solutionMenuItmHandler" text="Solution" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="93.0" prefWidth="1280.0" spacing="5.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dictionary Size:" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Text>
+                  <Text fx:id="wordCountText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin></Separator>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Points:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Text>
+                  <Text fx:id="pointsText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Separator orientation="VERTICAL" prefHeight="200.0">
+                     <HBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </HBox.margin></Separator>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Success Rate:">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Text>
+                  <Text fx:id="successRateText" strokeType="OUTSIDE" strokeWidth="0.0" text="0.0%">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER" fillHeight="false" spacing="30.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="633.0" prefWidth="701.0">
+                     <children>
+                        <HBox alignment="CENTER" spacing="7.0">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="297.0" prefWidth="237.0">
+                                 <children>
+                                    <HBox alignment="CENTER" prefHeight="34.0" prefWidth="237.0" spacing="5.0">
+                                       <children>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HP:" textAlignment="CENTER">
+                                             <font>
+                                                <Font name="Comic Sans MS" size="27.0" />
+                                             </font>
+                                          </Text>
+                                          <Text fx:id="hpText" strokeType="OUTSIDE" strokeWidth="0.0" text="6">
+                                             <font>
+                                                <Font name="Comic Sans MS" size="26.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                    <Text fx:id="gameOutcomeText" fill="#43d61c" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU WON!" textAlignment="CENTER" wrappingWidth="220.9375">
+                                       <font>
+                                          <Font name="Comic Sans MS" size="32.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                                 <padding>
+                                    <Insets top="42.0" />
+                                 </padding>
+                              </VBox>
+                              <ImageView fx:id="hangmanImg" fitHeight="297.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <image>
+                                    <Image url="@../../resources/medialab/hangman_stages/stage0.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <Text fx:id="secretWord" strokeType="OUTSIDE" strokeWidth="0.0" text="_ _ _ _ _ _ _ _" textAlignment="CENTER" wrappingWidth="600.0">
+                           <font>
+                              <Font name="Comic Sans MS" size="32.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" top="20.0" />
+                           </VBox.margin>
+                        </Text>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="30.0" right="30.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="532.0" prefWidth="14.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Separator>
+                  <HBox alignment="CENTER" prefHeight="605.0" prefWidth="455.0" spacing="20.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="605.0" prefWidth="45.0" spacing="5.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cell">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <ListView fx:id="cellList" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="44.0" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="605.0" prefWidth="205.0" spacing="5.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Letter Choices">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <ListView fx:id="probabilityList" maxHeight="-Infinity" maxWidth="-Infinity" prefWidth="203.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="104.0" prefWidth="1280.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <ComboBox fx:id="cellDropdown" onAction="#handleCellDropdownChange" prefHeight="25.0" prefWidth="91.0" promptText="Cell" />
+            <ComboBox fx:id="letterDropdown" prefHeight="25.0" prefWidth="91.0" promptText="Letter" />
+            <Button fx:id="submitBtn" mnemonicParsing="false" onAction="#submitBtnHandler" prefHeight="38.0" prefWidth="100.0" text="Submit" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
